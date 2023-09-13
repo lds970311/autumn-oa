@@ -12,7 +12,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/admin/system/sysRole")
@@ -31,9 +33,9 @@ public class SysRoleController {
 
     @Operation(summary = "条件分页查询")
     @GetMapping("/{page}/{limit}")
-    public Result<List<SysRole>> findRoleByPage(@PathVariable("page") Integer page,
-                                                @PathVariable("limit") Integer limit,
-                                                SysRoleQueryVo sysRoleQueryVo) {
+    public Result<Map<String, Object>> findRoleByPage(@PathVariable("page") Integer page,
+                                                      @PathVariable("limit") Integer limit,
+                                                      SysRoleQueryVo sysRoleQueryVo) {
         Page<SysRole> sysRolePage = new Page<>(page, limit);
         LambdaQueryWrapper<SysRole> wrapper = new LambdaQueryWrapper<>();
         String roleName = sysRoleQueryVo.getRoleName();
@@ -41,7 +43,11 @@ public class SysRoleController {
             wrapper.like(SysRole::getRoleName, roleName);
         }
         sysRoleService.page(sysRolePage, wrapper);
-        return Result.ok(sysRolePage.getRecords());
+        Map<String, Object> map = new HashMap<>();
+        map.put("records", sysRolePage.getRecords());
+        map.put("total", sysRolePage.getTotal());
+        map.put("current", sysRolePage.getCurrent());
+        return Result.ok(map);
     }
 
     @Operation(summary = "添加角色")
