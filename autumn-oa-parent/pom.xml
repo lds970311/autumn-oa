@@ -27,7 +27,7 @@
         <java.version>17</java.version>
         <mybatis-plus.version>3.5.3.1</mybatis-plus.version>
         <mysql.version>8.0.24</mysql.version>
-        <knife4j.version>3.0.3</knife4j.version>
+        <knife4j.version>2.2.0</knife4j.version>
         <jwt.version>0.9.1</jwt.version>
         <fastjson.version>2.0.21</fastjson.version>
         <springboot.version>3.0.9</springboot.version>
@@ -51,9 +51,9 @@
             </dependency>
             <!--knife4j-->
             <dependency>
-                <groupId>io.springfox</groupId>
-                <artifactId>springfox-boot-starter</artifactId>
-                <version>3.0.0</version>
+                <groupId>org.springdoc</groupId>
+                <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
             <!--jjwt-->
             <dependency>

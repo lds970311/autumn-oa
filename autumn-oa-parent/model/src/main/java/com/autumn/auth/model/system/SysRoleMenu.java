@@ -4,25 +4,26 @@ package com.autumn.auth.model.system;
 import com.autumn.auth.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel(description = "角色菜单")
+@Schema(description = "角色菜单")
 @TableName("sys_role_menu")
 public class SysRoleMenu extends BaseEntity {
 	
 	@Serial
 	private static final long serialVersionUID = 1L;
 
-	@ApiModelProperty(value = "角色id")
+	@Schema(title = "角色id")
 	@TableField("role_id")
 	private Long roleId;
 
-	@ApiModelProperty(value = "菜单id")
+	@Schema(title = "菜单id")
 	@TableField("menu_id")
 	private Long menuId;
 
