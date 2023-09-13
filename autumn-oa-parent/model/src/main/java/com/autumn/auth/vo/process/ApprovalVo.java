@@ -1,6 +1,6 @@
 package com.autumn.auth.vo.process;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
@@ -10,9 +10,9 @@ public class ApprovalVo {
 
     private String taskId;
 
-    @ApiModelProperty(value = "状态")
+    @Schema(title = "状态")
     private Integer status;
 
-    @ApiModelProperty(value = "审批描述")
+    @Schema(title = "审批描述")
     private String description;
 }

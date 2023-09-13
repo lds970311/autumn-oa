@@ -1,14 +1,14 @@
 package com.autumn.auth.vo.wechat;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
 public class BindPhoneVo {
 
-    @ApiModelProperty(value = "手机")
+    @Schema(title = "手机")
     private String phone;
 
-    @ApiModelProperty(value = "openId")
+    @Schema(title = "openId")
     private String openId;
 }

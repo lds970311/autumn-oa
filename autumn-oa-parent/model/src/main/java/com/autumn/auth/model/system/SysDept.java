@@ -4,50 +4,51 @@ package com.autumn.auth.model.system;
 import com.autumn.auth.model.base.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.io.Serial;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@ApiModel(description = "部门")
+@Schema(description = "部门")
 @TableName("sys_dept")
 public class SysDept extends BaseEntity {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "部门名称")
+    @Schema(title = "部门名称")
     @TableField("name")
     private String name;
 
-    @ApiModelProperty(value = "上级部门id")
+    @Schema(title = "上级部门id")
     @TableField("parent_id")
     private Long parentId;
 
-    @ApiModelProperty(value = "树结构")
+    @Schema(title = "树结构")
     @TableField("tree_path")
     private String treePath;
 
-    @ApiModelProperty(value = "排序")
-    @TableField("sort_value")
-    private Integer sortValue;
+    @Schema(title = "排序")
+    @TableField("sort_title")
+    private Integer sorttitle;
 
-    @ApiModelProperty(value = "负责人")
+    @Schema(title = "负责人")
     @TableField("leader")
     private String leader;
 
-    @ApiModelProperty(value = "电话")
+    @Schema(title = "电话")
     @TableField("phone")
     private String phone;
 
-    @ApiModelProperty(value = "状态（1正常 0停用）")
+    @Schema(title = "状态（1正常 0停用）")
     @TableField("status")
     private Integer status;
 
-    @ApiModelProperty(value = "下级部门")
+    @Schema(title = "下级部门")
     @TableField(exist = false)
     private List<SysDept> children;
 
