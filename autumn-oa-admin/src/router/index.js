@@ -42,11 +42,38 @@ export const constantRoutes = [
     children: [
       {
         path: 'sysRole',
-        component: () => import('@/views/system/sysRole/list'),
+        component: () => import('@/views/system/SysRole.vue'),
         meta: {
           title: '角色管理',
           icon: 'el-icon-s-help'
         }
+      },
+      {
+        name: 'sysUser',
+        path: 'sysUser',
+        component: () => import('@/views/system/SysUser'),
+        meta: {
+          title: '用户管理',
+          icon: 'el-icon-s-custom'
+        }
+      },
+      {
+        name: 'sysMenu',
+        path: 'sysMenu',
+        component: () => import('@/views/system/SysMenu.vue'),
+        meta: {
+          title: '菜单管理',
+          icon: 'el-icon-s-unfold'
+        }
+      },
+      {
+        path: 'assignAuth',
+        component: () => import('@/views/system/SysRole.vue'),
+        meta: {
+          activeMenu: '/system/sysRole',
+          title: '角色授权'
+        },
+        hidden: true
       }
     ]
   },

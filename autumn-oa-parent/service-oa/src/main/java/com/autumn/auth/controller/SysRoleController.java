@@ -3,6 +3,7 @@ package com.autumn.auth.controller;
 import com.alibaba.druid.util.StringUtils;
 import com.autumn.auth.model.system.SysRole;
 import com.autumn.auth.service.SysRoleService;
+import com.autumn.auth.vo.system.AssginRoleVo;
 import com.autumn.auth.vo.system.SysRoleQueryVo;
 import com.autumn.result.Result;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -98,4 +99,21 @@ public class SysRoleController {
         }
         return Result.fail("批量删除角色失败! 请重试");
     }
+
+
+    @Operation(summary = "根据用户查询角色")
+    @GetMapping("toAssign/{userId}")
+    public Result<Map<String, Object>> toAssign(@PathVariable("userId") Long userId) {
+        Map<String, Object> res = sysRoleService.findRoleInfoByUserId(userId);
+        return Result.ok(res);
+    }
+
+    @Operation(summary = "根据用户分配角色")
+    @PostMapping("/doAssign")
+    public Result<Void> doAssign(@RequestBody AssginRoleVo assginRoleVo) {
+        sysRoleService.doAssign(assginRoleVo);
+        return Result.ok();
+    }
+
 }
+

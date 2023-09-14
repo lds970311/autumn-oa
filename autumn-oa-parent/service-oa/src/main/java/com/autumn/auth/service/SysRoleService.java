@@ -2,7 +2,10 @@ package com.autumn.auth.service;
 
 
 import com.autumn.auth.model.system.SysRole;
+import com.autumn.auth.vo.system.AssginRoleVo;
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.Map;
 
 /**
 * @author 26966
@@ -11,4 +14,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface SysRoleService extends IService<SysRole> {
 
+    Map<String, Object> findRoleInfoByUserId(Long userId);
+
+    void doAssign(AssginRoleVo assginRoleVo);
 }

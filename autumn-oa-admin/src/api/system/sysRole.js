@@ -59,3 +59,17 @@ export function batchRemove(idList) {
   })
 }
 
+export function getRoles(adminId) {
+  return request({
+    url: `${api_name}/toAssign/${adminId}`,
+    method: 'get'
+  })
+}
+
+export function assignRoles(assginRoleVo) {
+  return request({
+    url: `${api_name}/doAssign`,
+    method: 'post',
+    data: assginRoleVo
+  })
+}
