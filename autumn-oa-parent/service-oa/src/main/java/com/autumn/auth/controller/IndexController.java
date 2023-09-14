@@ -1,6 +1,7 @@
 package com.autumn.auth.controller;
 
 import com.autumn.result.Result;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ public class IndexController {
      * @return
      */
     @PostMapping("login")
+    @Operation(summary = "后台登录")
     public Result<Map<String, Object>> login() {
         Map<String, Object> map = new HashMap<>();
         map.put("token", "admin");
@@ -32,6 +34,7 @@ public class IndexController {
      * @return
      */
     @GetMapping("info")
+    @Operation(summary = "获取当前用户信息")
     public Result<Map<String, Object>> info() {
         Map<String, Object> map = new HashMap<>();
         map.put("roles", "[admin]");
@@ -45,6 +48,7 @@ public class IndexController {
      *
      * @return
      */
+    @Operation(summary = "退出登录")
     @PostMapping("logout")
     public Result<Void> logout() {
         return Result.ok();

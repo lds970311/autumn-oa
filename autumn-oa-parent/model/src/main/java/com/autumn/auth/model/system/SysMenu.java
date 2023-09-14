@@ -49,8 +49,8 @@ public class SysMenu extends BaseEntity {
     private String icon;
 
     @Schema(title = "排序")
-    @TableField("sort_title")
-    private Integer sorttitle;
+    @TableField("sort_value")
+    private Integer sortValue;
 
     @Schema(title = "状态(0:禁止,1:正常)")
     @TableField("status")

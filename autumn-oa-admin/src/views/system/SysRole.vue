@@ -92,6 +92,11 @@
 <script>
 import { batchRemove, getById, getPageList, removeById, save, update } from '@/api/system/sysRole'
 
+const roleFormObj = {
+  roleCode: '',
+  roleName: ''
+}
+
 export default {
   name: 'List',
   data() {
@@ -160,6 +165,7 @@ export default {
     },
     addRole() {
       this.dialogVisible = true
+      this.sysRole = Object.assign({}, roleFormObj)
     },
     async fetchRoleById(id) {
       try {
@@ -200,7 +206,6 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        // 点击确定，远程调用ajax
         // 遍历selection，将id取出放入id列表
         const idList = []
         this.multipleSelection.forEach(item => {
