@@ -68,7 +68,7 @@ export const constantRoutes = [
       },
       {
         path: 'assignAuth',
-        component: () => import('@/views/system/SysRole.vue'),
+        component: () => import('@/views/system/AssignAuth'),
         meta: {
           activeMenu: '/system/sysRole',
           title: '角色授权'
