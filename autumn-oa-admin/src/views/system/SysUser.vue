@@ -56,16 +56,16 @@
       </el-table-column>
 
       <el-table-column prop="username" label="用户名" width="100"/>
-      <el-table-column prop="name" label="姓名" width="70"/>
+      <el-table-column prop="name" label="姓名" width="120"/>
       <el-table-column prop="phone" label="手机" width="120"/>
-      <el-table-column prop="postName" label="岗位" width="100"/>
-      <el-table-column prop="deptName" label="部门" width="100"/>
-      <el-table-column label="所属角色" width="130">
+      <el-table-column prop="postName" label="岗位"/>
+      <el-table-column prop="deptName" label="部门"/>
+      <el-table-column label="所属角色">
         <template slot-scope="scope">
           <span v-for="item in scope.row.roleList" :key="item.id" style="margin-right: 10px;">{{ item.roleName }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="状态" width="80">
+      <el-table-column label="状态">
         <template slot-scope="scope">
           <el-switch
             v-model="scope.row.status === 1"
@@ -73,7 +73,7 @@
           />
         </template>
       </el-table-column>
-      <el-table-column prop="createTime" label="创建时间" width="160"/>
+      <el-table-column prop="createTime" label="创建时间"/>
 
       <el-table-column label="操作" width="180" align="center" fixed="right">
         <template slot-scope="scope">

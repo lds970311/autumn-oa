@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.autumn.auth.vo.system.AssginMenuVo;
 
 import java.util.List;
 
@@ -44,5 +45,19 @@ public class SysMenuController {
     public Result<String> remove(@PathVariable Long id) {
         boolean b = sysMenuService.removeMenuById(id);
         return b ? Result.ok("删除成功") : Result.fail("该菜单下存在子菜单,不能删除");
+    }
+
+    @Operation(summary = "根据角色获取菜单")
+    @GetMapping("toAssign/{roleId}")
+    public Result toAssign(@PathVariable Long roleId) {
+        List<SysMenu> list = sysMenuService.findSysMenuByRoleId(roleId);
+        return Result.ok(list);
+    }
+
+    @Operation(summary = "给角色分配权限")
+    @PostMapping("/doAssign")
+    public Result doAssign(@RequestBody AssginMenuVo assignMenuVo) {
+        boolean b = sysMenuService.doAssign(assignMenuVo);
+        return b ? Result.ok() : Result.fail();
     }
 }
