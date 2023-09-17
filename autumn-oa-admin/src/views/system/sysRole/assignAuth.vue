@@ -18,12 +18,12 @@
     </div>
   </div>
 </template>
-
 <script>
-import { doAssign, toAssign } from '@/api/system/sysMenu'
+import api from '@/api/system/sysMenu'
 
 export default {
-  name: 'AssignAuth',
+  name: 'RoleAuth',
+
   data() {
     return {
       loading: false, // 用来标识是否正在保存请求中的标识, 防止重复提交
@@ -34,23 +34,23 @@ export default {
       }
     }
   },
+
   created() {
     this.fetchData()
   },
+
   methods: {
     /*
-      初始化
-      */
+    初始化
+    */
     fetchData() {
       const roleId = this.$route.query.id
-      this.loading = true
-      toAssign(roleId).then(result => {
+      api.toAssign(roleId).then(result => {
         const sysMenuList = result.data
         this.sysMenuList = sysMenuList
         const checkedIds = this.getCheckedIds(sysMenuList)
         console.log('getPermissions() checkedIds', checkedIds)
         this.$refs.tree.setCheckedKeys(checkedIds)
-        this.loading = false
       })
     },
 
@@ -83,16 +83,12 @@ export default {
         menuIdList: idList
       }
       this.loading = true
-      doAssign(assginMenuVo).then(result => {
+      api.doAssign(assginMenuVo).then(result => {
         this.loading = false
-        this.$message.success(result.message || '分配权限成功')
+        this.$message.success(result.$message || '分配权限成功')
         this.$router.push('/system/sysRole')
       })
     }
   }
 }
 </script>
-
-<style scoped lang="scss">
-
-</style>

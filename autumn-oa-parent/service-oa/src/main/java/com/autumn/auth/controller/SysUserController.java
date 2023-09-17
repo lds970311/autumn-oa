@@ -4,6 +4,7 @@ import com.autumn.auth.model.system.SysUser;
 import com.autumn.auth.service.SysUserService;
 import com.autumn.auth.vo.system.SysUserQueryVo;
 import com.autumn.result.Result;
+import com.autumn.util.MD5;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class SysUserController {
     @Operation(description = "新增用户")
     @PostMapping("save")
     public Result<Void> save(@RequestBody SysUser user) {
+        //对密码加密
+        String newPwd = MD5.encrypt(user.getPassword());
+        user.setPassword(newPwd);
         boolean b = sysUserService.save(user);
         return b ? Result.ok() : Result.fail();
     }

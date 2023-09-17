@@ -3,6 +3,7 @@ package com.autumn.auth.service;
 
 import com.autumn.auth.model.system.SysMenu;
 import com.autumn.auth.vo.system.AssginMenuVo;
+import com.autumn.auth.vo.system.RouterVo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -21,4 +22,8 @@ public interface SysMenuService extends IService<SysMenu> {
     List<SysMenu> findSysMenuByRoleId(Long roleId);
 
     boolean doAssign(AssginMenuVo assignMenuVo);
+
+    List<RouterVo> findUserMenuListByUserId(Long userId);
+
+    List<String> findUserPermsByUserId(Long userId);
 }

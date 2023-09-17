@@ -41,6 +41,12 @@
             <artifactId>druid-spring-boot-3-starter</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.autumn</groupId>
+            <artifactId>security</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
     <build>

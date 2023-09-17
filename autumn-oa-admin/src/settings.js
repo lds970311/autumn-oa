@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Autumn办公系统后台',
+  title: 'Vue Admin Template',
 
   /**
    * @type {boolean} true | false
