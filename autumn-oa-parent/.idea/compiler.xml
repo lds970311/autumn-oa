@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="common-util" />
         <module name="model" />
+        <module name="security" />
         <module name="service-oa" />
         <module name="service-util" />
       </profile>
@@ -18,6 +19,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="common-util" options="-parameters" />
       <module name="model" options="-parameters" />
+      <module name="security" options="-parameters" />
       <module name="service-oa" options="-parameters" />
       <module name="service-util" options="-parameters" />
     </option>

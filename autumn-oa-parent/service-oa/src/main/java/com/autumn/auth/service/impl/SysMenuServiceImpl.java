@@ -1,18 +1,22 @@
 package com.autumn.auth.service.impl;
 
 
+import com.alibaba.druid.util.StringUtils;
 import com.autumn.auth.mapper.SysRoleMenuMapper;
 import com.autumn.auth.model.system.SysMenu;
 import com.autumn.auth.model.system.SysRoleMenu;
 import com.autumn.auth.service.SysMenuService;
 import com.autumn.auth.mapper.SysMenuMapper;
 import com.autumn.auth.vo.system.AssginMenuVo;
+import com.autumn.auth.vo.system.MetaVo;
+import com.autumn.auth.vo.system.RouterVo;
 import com.autumn.util.MenuHelper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,6 +93,100 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
 
         return true;
+    }
+
+    /**
+     * 查询数据库动态构建路由结构
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<RouterVo> findUserMenuListByUserId(Long userId) {
+        List<SysMenu> menuList;
+        if (userId == 1) {
+            //是admin,查询全部菜单
+            LambdaQueryWrapper<SysMenu> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(SysMenu::getStatus, 1)
+                    .orderByAsc(SysMenu::getSortValue);
+            menuList = this.baseMapper.selectList(wrapper);
+        } else {
+            menuList = this.baseMapper.findMenuListByUserId(userId);
+        }
+        List<SysMenu> tree = MenuHelper.buildTree(menuList);
+        return this.buildRouter(tree);
+    }
+
+    private List<RouterVo> buildRouter(List<SysMenu> tree) {
+        List<RouterVo> routers = new ArrayList<>();
+
+        for (SysMenu menu : tree) {
+            RouterVo routerVo = new RouterVo();
+            routerVo.setHidden(false);
+            routerVo.setAlwaysShow(false);
+            routerVo.setPath(getRouterPath(menu));
+            routerVo.setComponent(menu.getComponent());
+            routerVo.setMeta(new MetaVo(menu.getName(), menu.getIcon()));
+            //下一层
+            List<SysMenu> children = menu.getChildren();
+            if (menu.getType() == 1) {
+                //加载出来下面隐藏路由
+                List<SysMenu> hiddenMenuList = children.stream()
+                        .filter(item -> !StringUtils.isEmpty(item.getComponent()))
+                        .toList();
+                for (SysMenu hidden : hiddenMenuList) {
+                    RouterVo hiddenRouter = new RouterVo();
+                    hiddenRouter.setHidden(true);
+                    hiddenRouter.setAlwaysShow(false);
+                    hiddenRouter.setPath(getRouterPath(hidden));
+                    hiddenRouter.setComponent(hidden.getComponent());
+                    hiddenRouter.setMeta(new MetaVo(hidden.getName(), hidden.getIcon()));
+                    routers.add(hiddenRouter);
+                }
+            } else {
+                if (!CollectionUtils.isEmpty(children)) {
+                    if(children.size() > 0) {
+                        routerVo.setAlwaysShow(true);
+                    }
+                    routerVo.setChildren(buildRouter(children));
+                }
+
+            }
+            routers.add(routerVo);
+        }
+        return routers;
+    }
+
+    /**
+     * 获取路由地址
+     *
+     * @param menu 菜单信息
+     * @return 路由地址
+     */
+    private String getRouterPath(SysMenu menu) {
+        String routerPath = "/" + menu.getPath();
+        if (menu.getParentId().intValue() != 0) {
+            routerPath = menu.getPath();
+        }
+        return routerPath;
+    }
+
+    @Override
+    public List<String> findUserPermsByUserId(Long userId) {
+        List<SysMenu> menuList;
+        //判断是否是admin
+        if (userId == 1) {
+            LambdaQueryWrapper<SysMenu> wrapper = new LambdaQueryWrapper<>();
+            wrapper.eq(SysMenu::getStatus, 1);
+            menuList = this.baseMapper.selectList(wrapper);
+        } else {
+            menuList = this.baseMapper.findMenuListByUserId(userId);
+        }
+        List<String> permList = menuList.stream()
+                .map(SysMenu::getPerms)
+                .filter(perms -> !StringUtils.isEmpty(perms))
+                .toList();
+        return permList;
     }
 }
 
