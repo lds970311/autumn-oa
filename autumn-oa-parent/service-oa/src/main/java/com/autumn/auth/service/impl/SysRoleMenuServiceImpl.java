@@ -1,9 +1,9 @@
 package com.autumn.auth.service.impl;
 
 
+import com.autumn.auth.mapper.SysRoleMenuMapper;
 import com.autumn.auth.model.system.SysRoleMenu;
 import com.autumn.auth.service.SysRoleMenuService;
-import com.autumn.auth.mapper.SysRoleMenuMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 

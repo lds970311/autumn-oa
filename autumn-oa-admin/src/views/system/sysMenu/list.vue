@@ -9,12 +9,12 @@
       </el-button>
     </div>
     <el-table
-        :data="sysMenuList"
-        style="width: 100%;margin-bottom: 20px;margin-top: 10px;"
-        row-key="id"
-        border
-        :default-expand-all="false"
-        :tree-props="{children: 'children'}"
+      :data="sysMenuList"
+      style="width: 100%;margin-bottom: 20px;margin-top: 10px;"
+      row-key="id"
+      border
+      :default-expand-all="false"
+      :tree-props="{children: 'children'}"
     >
 
       <el-table-column prop="name" label="菜单名称" width="160"/>
@@ -30,7 +30,7 @@
       <el-table-column label="状态" width="80">
         <template slot-scope="scope">
           <el-switch
-              v-model="scope.row.status === 1" :disabled="true"
+            v-model="scope.row.status === 1" :disabled="$hasBP('bnt.sysMenu.changeStatus')"
           >
           </el-switch>
         </template>

@@ -11,6 +11,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -51,6 +52,7 @@ public class SysRoleController {
         return Result.ok(map);
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.add')")
     @Operation(summary = "添加角色")
     @PostMapping("/save")
     public Result<String> addRole(@RequestBody SysRole sysRole) {
@@ -62,6 +64,7 @@ public class SysRoleController {
     }
 
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.list')")
     @Operation(summary = "根据id查询角色")
     @GetMapping("/get/{id}")
     public Result<SysRole> getRoleById(@PathVariable("id") Integer id) {
@@ -70,6 +73,7 @@ public class SysRoleController {
     }
 
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.update')")
     @Operation(summary = "更新角色")
     @PutMapping("update")
     public Result<String> updateRole(@RequestBody SysRole sysRole) {
@@ -80,6 +84,7 @@ public class SysRoleController {
         return Result.fail("更新失败! 请重试");
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @Operation(summary = "根据id删除")
     @DeleteMapping("/remove/{id}")
     public Result<String> removeById(@PathVariable("id") Integer id) {
@@ -90,6 +95,7 @@ public class SysRoleController {
         return Result.fail("删除失败! 请重试");
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysRole.remove')")
     @Operation(summary = "批量删除")
     @DeleteMapping("batchDelete")
     public Result<String> batchDelete(@RequestBody List<Integer> idList) {
