@@ -8,15 +8,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serial;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(description = "岗位")
 @TableName("sys_post")
 public class SysPost extends BaseEntity {
 
-	@Serial
+
 	private static final long serialVersionUID = 1L;
 
 	@Schema(title = "岗位编码")

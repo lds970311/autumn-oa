@@ -17,4 +17,6 @@ public interface SysUserService extends IService<SysUser> {
     Map<String, Object> getUserByPage(Integer pageNo, Integer limit, SysUserQueryVo sysUserQueryVo);
 
     boolean updateStatus(Long id, Integer status);
+
+    SysUser getByUsername(String username);
 }

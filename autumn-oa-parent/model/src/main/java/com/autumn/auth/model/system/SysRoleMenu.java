@@ -8,15 +8,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serial;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(description = "角色菜单")
 @TableName("sys_role_menu")
 public class SysRoleMenu extends BaseEntity {
 	
-	@Serial
+
 	private static final long serialVersionUID = 1L;
 
 	@Schema(title = "角色id")

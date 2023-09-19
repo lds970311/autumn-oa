@@ -2,11 +2,11 @@ package com.autumn.auth.service.impl;
 
 
 import com.alibaba.druid.util.StringUtils;
+import com.autumn.auth.mapper.SysMenuMapper;
 import com.autumn.auth.mapper.SysRoleMenuMapper;
 import com.autumn.auth.model.system.SysMenu;
 import com.autumn.auth.model.system.SysRoleMenu;
 import com.autumn.auth.service.SysMenuService;
-import com.autumn.auth.mapper.SysMenuMapper;
 import com.autumn.auth.vo.system.AssginMenuVo;
 import com.autumn.auth.vo.system.MetaVo;
 import com.autumn.auth.vo.system.RouterVo;
@@ -65,7 +65,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         List<SysRoleMenu> sysRoleMenus = sysRoleMenuMapper.selectList(menuLambdaQueryWrapper);
         List<Long> menu_ids = sysRoleMenus.stream()
                 .map(SysRoleMenu::getMenuId)
-                .toList();
+                .collect(Collectors.toList());
 
         for (SysMenu allMenu : allMenus) {
             if (menu_ids.contains(allMenu.getId())) {
@@ -133,7 +133,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 //加载出来下面隐藏路由
                 List<SysMenu> hiddenMenuList = children.stream()
                         .filter(item -> !StringUtils.isEmpty(item.getComponent()))
-                        .toList();
+                        .collect(Collectors.toList());
                 for (SysMenu hidden : hiddenMenuList) {
                     RouterVo hiddenRouter = new RouterVo();
                     hiddenRouter.setHidden(true);
@@ -145,7 +145,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
                 }
             } else {
                 if (!CollectionUtils.isEmpty(children)) {
-                    if(children.size() > 0) {
+                    if (children.size() > 0) {
                         routerVo.setAlwaysShow(true);
                     }
                     routerVo.setChildren(buildRouter(children));
@@ -185,7 +185,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         List<String> permList = menuList.stream()
                 .map(SysMenu::getPerms)
                 .filter(perms -> !StringUtils.isEmpty(perms))
-                .toList();
+                .collect(Collectors.toList());
         return permList;
     }
 }

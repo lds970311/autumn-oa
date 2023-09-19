@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serial;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
@@ -17,7 +16,6 @@ import java.util.List;
 @TableName("oa_process_type")
 public class ProcessType extends BaseEntity {
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     @Schema(title = "类型名称")

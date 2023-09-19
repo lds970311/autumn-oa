@@ -8,7 +8,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serial;
+
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -16,7 +16,7 @@ import java.io.Serial;
 @TableName("oa_process")
 public class Process extends BaseEntity {
 
-    @Serial
+
     private static final long serialVersionUID = 1L;
 
     @Schema(title = "审批code")

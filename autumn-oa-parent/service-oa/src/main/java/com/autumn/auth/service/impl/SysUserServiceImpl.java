@@ -2,12 +2,11 @@ package com.autumn.auth.service.impl;
 
 
 import com.alibaba.druid.util.StringUtils;
+import com.autumn.auth.mapper.SysUserMapper;
 import com.autumn.auth.model.system.SysUser;
 import com.autumn.auth.service.SysUserService;
-import com.autumn.auth.mapper.SysUserMapper;
 import com.autumn.auth.vo.system.SysUserQueryVo;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -56,6 +55,13 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         SysUser sysUser = this.baseMapper.selectById(id);
         sysUser.setStatus(status);
         return saveOrUpdate(sysUser);
+    }
+
+    @Override
+    public SysUser getByUsername(String username) {
+        LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(SysUser::getUsername, username);
+        return this.baseMapper.selectOne(wrapper);
     }
 }
 

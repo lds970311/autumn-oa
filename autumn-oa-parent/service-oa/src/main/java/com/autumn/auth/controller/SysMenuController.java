@@ -2,12 +2,13 @@ package com.autumn.auth.controller;
 
 import com.autumn.auth.model.system.SysMenu;
 import com.autumn.auth.service.SysMenuService;
+import com.autumn.auth.vo.system.AssginMenuVo;
 import com.autumn.result.Result;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import com.autumn.auth.vo.system.AssginMenuVo;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class SysMenuController {
         return Result.ok(list);
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysMenu.add')")
     @Operation(summary = "新增菜单")
     @PostMapping("/save")
     public Result<Void> save(@RequestBody SysMenu permission) {
@@ -33,6 +35,7 @@ public class SysMenuController {
         return b ? Result.ok() : Result.fail();
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysMenu.update')")
     @Operation(summary = "修改菜单")
     @PutMapping("/update")
     public Result<Void> updateById(@RequestBody SysMenu permission) {
@@ -40,6 +43,7 @@ public class SysMenuController {
         return b ? Result.ok() : Result.fail();
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysMenu.remove')")
     @Operation(summary = "删除菜单")
     @DeleteMapping("remove/{id}")
     public Result<String> remove(@PathVariable Long id) {
@@ -54,6 +58,7 @@ public class SysMenuController {
         return Result.ok(list);
     }
 
+    @PreAuthorize("hasAuthority('bnt.sysUser.assignRole')")
     @Operation(summary = "给角色分配权限")
     @PostMapping("/doAssign")
     public Result doAssign(@RequestBody AssginMenuVo assignMenuVo) {

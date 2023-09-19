@@ -8,8 +8,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import java.io.Serial;
-
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -17,7 +15,7 @@ import java.io.Serial;
 @TableName("sys_role")
 public class SysRole extends BaseEntity {
 	
-	@Serial
+
 	private static final long serialVersionUID = 1L;
 
 	//@NotBlank(message = "角色名称不能为空")

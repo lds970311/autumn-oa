@@ -1,12 +1,6 @@
 package com.autumn.common;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-
-import io.jsonwebtoken.CompressionCodecs;
-import org.springframework.context.annotation.PropertySource;
+import io.jsonwebtoken.*;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;

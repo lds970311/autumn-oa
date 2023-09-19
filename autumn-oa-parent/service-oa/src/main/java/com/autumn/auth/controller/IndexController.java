@@ -11,11 +11,10 @@ import com.autumn.util.MD5;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +36,7 @@ public class IndexController {
      */
     @PostMapping("login")
     @Operation(summary = "后台登录")
-    public Result<Object> login(@RequestBody LoginVo loginVo,HttpServletRequest request) {
+    public Result<Object> login(@RequestBody LoginVo loginVo, HttpServletRequest request) {
         String username = loginVo.getUsername();
         LambdaQueryWrapper<SysUser> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(SysUser::getUsername, username);
